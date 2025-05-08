@@ -38,11 +38,22 @@ node app.js
 
 
 ### Example/Sample Output
-✅ Client started
-🔎 Missing Sequences: [ 3, 10 ]
-📨 Requesting missing packet: Seq 3
-📨 Requesting missing packet: Seq 10
-✅ Received missing packet: Seq 3
-✅ Received missing packet: Seq 10
-✅ All packets saved to output.json
+ Client started
+ 
+Missing Sequences: [ 3, 10 ]
+
+
+ Requesting missing packet: Seq 3
+
+
+ Requesting missing packet: Seq 10
+
+
+ Received missing packet: Seq 3
+
+
+ Received missing packet: Seq 10
+
+
+All packets saved to output.json
 
