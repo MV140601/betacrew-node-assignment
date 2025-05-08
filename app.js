@@ -1,7 +1,7 @@
  const net = require('net');
 const fs = require('fs');
 
-console.log('✅ Client started');
+console.log('Client started');
 
 const HOST = '127.0.0.1';
 const PORT = 3000;
@@ -76,7 +76,7 @@ function requestMissingTCPDataPackets(missingSeqs, callback) {
         let response = Buffer.alloc(0);
 
         client.connect(PORT, HOST, () => {
-            console.log(`📨 Requesting missing packet: Seq ${seq}`);
+            console.log(` Requesting missing packet: Seq ${seq}`);
             const payload = Buffer.alloc(2);
             payload.writeUInt8(CALL_TYPE_RESEND, 0);
             payload.writeUInt8(seq, 1);
@@ -88,7 +88,7 @@ function requestMissingTCPDataPackets(missingSeqs, callback) {
              const TCPDataPackets = processTCPDataPackets(response);
             TCPDataPackets.forEach(pkt => {
                 receivedTCPDataPackets.set(pkt.sequence, pkt);
-                console.log(`✅ Received missing packet: Seq ${pkt.sequence}`);
+                console.log(`Received missing packet: Seq ${pkt.sequence}`);
             });
 
             
@@ -138,14 +138,14 @@ function writeOutputJSONFile() {
         .sort((a, b) => a.sequence - b.sequence);
 
     fs.writeFileSync('output.json', JSON.stringify(sortedTCPDataPackets, null, 2));
-    console.log('✅ All TCPDataPackets saved to output.json');
+    console.log('All TCPDataPackets saved to output.json');
 }
 
 requestAllTCPDataPackets(() => {
     const missing = detectMissingTCPDataSequences();
-    console.log('🔎 Missing TCPDataSequences:', missing);
+    console.log('Missing TCPDataSequences:', missing);
 
     requestMissingTCPDataPackets(missing, () => {
-        console.log('✅ All data fetching complete');
+        console.log(' All data fetching complete');
     });
 });
